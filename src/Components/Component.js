@@ -1,22 +1,24 @@
 import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
+import {Link, } from "react-router-dom";
 
 class RedComponent extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
             theme: true,
         };
+     
     }
     async reduxTest() {
         await this.props.toggleTodo("simple")
         await this.props.SpeedMeter(2)
     }
-
     render() {
         console.warn("a sample", this.props.todos)
         return (
             <div className="App">
+                {/* <h3>ID: {match.params.id}</h3> */}
                 <button className="btn" onClick={() => { this.reduxTest() }} >Load Data </button>
                 <Table striped bordered condensed hover responsive>
                     <thead>
@@ -32,12 +34,14 @@ class RedComponent extends Component {
                         <tbody>
                             <tr>
                                 <td>{i}</td>
-                                <td><button className="btn" onClick={() => { this.props.SpeedMeter(dataItem.id) }} >{dataItem.id}</button></td>
+                                <td> 
+                                    <Link to={{pathname:'/Product/'+dataItem.id}}>{dataItem.id}</Link>
+                                    <button className="btn" onClick={() => { this.props.SpeedMeter(dataItem.id) }} >{dataItem.id}</button></td>
                                 <td>{dataItem.mobile}</td>
                                 <td>{dataItem.email}</td>
                             </tr>
                         </tbody>
-                    )
+                    ) 
                     }
 
                 </Table>

@@ -4,8 +4,6 @@ import ReactSpeedometer from "react-d3-speedometer";
 
 class MeterComponent extends Component {
   render() {
-
-    console.warn("meter", this.props.speedReply)
     return (
       <div>
         <ReactSpeedometer

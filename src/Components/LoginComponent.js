@@ -8,8 +8,6 @@ import { BrowserRouter as Router, Route, Link, } from "react-router-dom";
 import Form from 'react-validation/build/form';
 import Input from 'react-validation/build/input';
 import validator from 'validator';
-import Login from '../Containers/LoginContainer'
-// import Login from './LoginComponent'
 const required = (value) => {
     if (!value.toString().trim().length) {
         // We can return string or jsx as the 'error' prop for the validated Component
@@ -42,46 +40,49 @@ const password = (value, props, components) => {
         return <span className="error">Passwords are not equal.</span>
     }
 };
-class NavBar extends Component {
+class Login extends Component {
 
-    constructor(props, context) {
-        super(props, context);
+    constructor(props) {
+        super(props);
+
+
         this.state = {
             show: false
-        }
-
-
+        };
     }
 
-    handleShow() {
-        this.setState({ show: true });
-        console.warn("test click", this.state.show)
-    }
-    test(){
-        this.setState({ show: false});
-    }
+   
     render() {
-
+        // console.warn("login reply",this.props.loginReply)
         return (
             <div>
-                <Navbar inverse collapseOnSelect>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <a href="#">Company-x</a>
-                        </Navbar.Brand>
-                        <Navbar.Toggle />
-                    </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav pullRight>
-                            <NavItem eventKey={1} href="#"><Link to="/">Home</Link></NavItem>
-                            <NavItem eventKey={2} href="#" bsStyle="primary" bsSize="large" onClick={() => this.handleShow()}>
-                                Login
-                             </NavItem>
-                            <NavItem eventKey={3} href="#"><Link to="/Product">Product</Link></NavItem>
-                        </Nav>
-                    </Navbar.Collapse>
-                </Navbar>
-                <Login showModal={this.state.show} hideModel={this.test.bind(this)} />
+                <Modal show={this.props.showModal}>
+                    <Modal.Header >
+                        <Modal.Title>Login</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        <Form>
+                            <div>
+                                <label>
+                                    Email*
+                            <Input value='' className="form-control" name='email' validations={[required, email]} />
+                                </label>
+                            </div>
+                            <div>
+                                <label>
+                                    Password*
+                            <Input type='password' name='password' className="form-control" validations={[required]} />
+                                </label>
+                            </div>
+                            <div>
+                                <Button onClick={()=>{this.props.login(3)}} className="btn btn-primary">Submit</Button>
+                                <Button onClick={() =>  this.props.hideModel()}>Close</Button>
+                            </div>
+                        </Form>
+                    </Modal.Body>
+                </Modal>
+
+
             </div>
 
         );
@@ -89,4 +90,4 @@ class NavBar extends Component {
 }
 
 
-export default NavBar; 
+export default Login; 
