@@ -53,7 +53,7 @@ class Login extends Component {
 
    
     render() {
-        // console.warn("login reply",this.props.loginReply)
+        console.warn("login reply",this.props.loginReply)
         return (
             <div>
                 <Modal show={this.props.showModal}>

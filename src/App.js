@@ -7,14 +7,13 @@ import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import NavBar from './Components/NavBar';
 import ProductsComponent from './Components/ProductsComponent'
 import HomeComponent from './Components/HomeComponent'
-import {unregister} from  './Interceptor'
-console.warn("________",unregister)
+import { unregister } from './Interceptor'
+console.warn("________", unregister)
 // import Button from 'react-bootstrap/lib/Button';
 class App extends Component {
-  constructor(props)
-  {
+  constructor(props) {
     super(props)
-   
+
   }
   render() {
     return (
@@ -27,9 +26,9 @@ class App extends Component {
           <div className="container customContainer">
             <div className="row">
               <div>
-              <Route path="/Product/:id?" component={ProductsComponent} />
+                <Route path="/Product/:id?" component={ProductsComponent} />
 
-              {/* <Route path="/Product" component={ProductsComponent} />
+                {/* <Route path="/Product" component={ProductsComponent} />
                 <Route path="/Product/:id" component={ProductsComponent} /> */}
               </div>
             </div>

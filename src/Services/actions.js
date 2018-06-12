@@ -32,7 +32,6 @@ export const login = (params) => (dispatch: any) => {
       'Content-Type': 'application/json',
     }
   };
-
   console.warn("test data in action",data)
   let result = fetch(url, data)
   result.then((dataJson) => {
@@ -42,16 +41,12 @@ export const login = (params) => (dispatch: any) => {
         loginReply: data
       })
     })
-
   })
 }
 
 export const SpeedMeter = (value) => (dispatch: any) => {
-
   dispatch({
     type: SPEED,
     speed: value
-
-
   })
 } 

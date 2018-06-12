@@ -3,7 +3,7 @@ var token = "TestToken"
 export const unregister = fetchIntercept.register({
     request: function (url, config) {
 
-        console.warn("interceptor........... app");
+        // console.warn("interceptor........... app");
         config.headers.platform = "WebTest"
 
         // Modify the url or config here
