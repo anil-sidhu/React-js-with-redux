@@ -3,38 +3,44 @@ import { ThemeContext, theme } from './theme-context';
 import Container from './Containers/Container';
 import Graph from 'react-graph-vis';
 import { Row, Col, Grid } from 'react-bootstrap';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import NavBar from './Components/NavBar';
+import { BrowserRouter as Router, Route, Link,Switch } from "react-router-dom";
+
 import ProductsComponent from './Components/ProductsComponent'
 import HomeComponent from './Components/HomeComponent'
 import { unregister } from './Interceptor'
-console.warn("________", unregister)
-// import Button from 'react-bootstrap/lib/Button';
+import Loader from './utility/loader'
+import Logout from './Containers/LogoutContainer'
+import ProfileComponent from './Components/ProfileComponent'
+import ProtectedComponent from './Components/ProtectedComponent'
+
+import Navbar from './Containers/NavbarContainer';
+
 class App extends Component {
   constructor(props) {
-    super(props)
-
+    super(props)  
   }
-  render() {
-    return (
+  render() {   
+ 
+    return ( 
       <Router>
+        <Switch >
         <div>
-          <NavBar />
-          <div>
-            <Route exact path="/" component={HomeComponent} />
-          </div>
+          <Loader toggle={this.props.isLoading} />
+          <Navbar  />
+         
           <div className="container customContainer">
             <div className="row">
-              <div>
                 <Route path="/Product/:id?" component={ProductsComponent} />
-
-                {/* <Route path="/Product" component={ProductsComponent} />
-                <Route path="/Product/:id" component={ProductsComponent} /> */}
-              </div>
+                <Route exact path="/" component={HomeComponent} />
+                <Route exact path="/logout" component={Logout} />
+              
+                <ProtectedComponent path="/ProfileComponent" component={ProfileComponent} />
             </div>
-          </div>
+          </div> 
         </div>
+        </Switch>
       </Router>
+     
     );
   }
 }

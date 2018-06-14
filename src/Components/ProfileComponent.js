@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import Container from '../Containers/Container';
 
-class HomeComponent extends Component {
-  constructor(props) {
+class ProfileComponent extends Component {
+  constructor(props)
+  {
     super(props)
-
+    
   }
   render() {
     return (
       <div>
-
-        HomeComponent
-      </div>
+    
+    ProfileComponent
+      </div> 
 
     );
   }
 }
+ 
 
-
-export default HomeComponent;
+export default ProfileComponent; 
+ 

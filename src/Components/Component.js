@@ -8,9 +8,6 @@ let jsPDF = require('jspdf');
 
 require('jspdf-autotable');
 
-// const pdfConverter = require('jspdf');
-
-
 class RedComponent extends Component {
     constructor(props) {
         super(props);
@@ -22,16 +19,15 @@ class RedComponent extends Component {
 
 
     }
-    async reduxTest() {
-        await this.props.toggleTodo("simple")
-        await this.props.SpeedMeter(2)
-    }
     componentDidMount() {
+        this.props.loader(true)
+        console.warn("loader before.", this.props.isLoading)
         this.props.toggleTodo("simple")
-        this.props.SpeedMeter(2)
+
+
     }
     shouldComponentUpdate(nextProps, nextState) {
-        // console.warn("all data ", nextProps.todos.length)
+
         if (nextProps.todos != nextState.csvData) {
             this.setState({
                 csvData: nextProps.todos,
@@ -44,38 +40,38 @@ class RedComponent extends Component {
     exportCsv() {
 
         var columns = [
-            {title: "ID", dataKey: "id"},
-            {title: "Name", dataKey: "name"}, 
-            {title: "Country", dataKey: "country"}, 
-            
+            { title: "ID", dataKey: "id" },
+            { title: "Name", dataKey: "name" },
+            { title: "Country", dataKey: "country" },
+
         ];
         var rows = [
-            {"id": 1, "name": "Shaw", "country": "Tanzania"},
-            {"id": 2, "name": "Nelson", "country": "Kazakhstan"},
-            {"id": 3, "name": "Garcia", "country": "Madagascar"}
-           
+            { "id": 1, "name": "Shaw", "country": "Tanzania" },
+            { "id": 2, "name": "Nelson", "country": "Kazakhstan" },
+            { "id": 3, "name": "Garcia", "country": "Madagascar" }
+
         ];
-        
+
         // Only pt supported (not mm or in)
         var doc = new jsPDF('p', 'pt');
         doc.autoTable(columns, rows, {
-            styles: {fillColor: [100, 255, 255]},
+            styles: { fillColor: [100, 255, 255] },
             columnStyles: {
-                id: {fillColor: 255}
+                id: { fillColor: 255 }
             },
-            margin: {top: 60},
-            addPageContent: function(data) {
+            margin: { top: 60 },
+            addPageContent: function (data) {
                 doc.text("Header", 40, 30);
             }
         });
         doc.save('table.pdf');
 
-//         var canvas = document.getElementById("canvas");
-//        let newSet= rasterizeHTML.drawHTML('Some ' +
-//             '<span style="color: green; font-size: 20px;">HTML</span>' +
-//             ' with an image <img src="someimg.png">',
-//             canvas);
-// console.warn(newSet);
+        //         var canvas = document.getElementById("canvas");
+        //        let newSet= rasterizeHTML.drawHTML('Some ' +
+        //             '<span style="color: green; font-size: 20px;">HTML</span>' +
+        //             ' with an image <img src="someimg.png">',
+        //             canvas);
+        // console.warn(newSet);
         // var A = [['id', 'user', "mobile"]];
         // var re = this.state.csvData;
         // for (var item = 0; item < re.length; ++item) {
@@ -103,13 +99,12 @@ class RedComponent extends Component {
         // doc.addHTML()
         // doc.save('autoprint.pdf')
 
-
-
     }
     render() {
+
         return (
             <div className="App">
-                
+
                 <button className="btn" onClick={() => { this.exportCsv() }} >Export CSV </button>
                 {
                     this.state.next

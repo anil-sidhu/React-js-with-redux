@@ -1,7 +1,8 @@
-import { SPEED,LOGIN } from './constatnts'
+import { SPEED,LOGIN,LOADER,LOGOUT } from './constatnts'
 // import unregister from '../Interceptor' 
 // console.warn("unregister")
 export const toggleTodo = (id) => (dispatch: any) => {
+ setTimeout(()=>{
   const url = "http://192.168.14.126:3004/posts"
   const data = {
     method: 'GET',
@@ -15,11 +16,13 @@ export const toggleTodo = (id) => (dispatch: any) => {
     dataJson.json().then((data) => {
       dispatch({ 
         type: "TOGGLE_TODO",
-        id: data
+        id: data,
+        isLoading:false 
       })
     })
 
   })
+ },500)
 }
 
 export const login = (params) => (dispatch: any) => {
@@ -32,17 +35,27 @@ export const login = (params) => (dispatch: any) => {
       'Content-Type': 'application/json',
     }
   };
-  console.warn("test data in action",data)
   let result = fetch(url, data)
   result.then((dataJson) => {
     dataJson.json().then((data) => {
+      data.loggedIn=true
       dispatch({
         type: "LOGIN",
-        loginReply: data
+        loginReply:true,
+        isLoading:false, 
       })
     })
   })
 }
+
+export const logout = () => (dispatch: any) => {
+
+  let store= localStorage.removeItem("loggedIn");
+  dispatch({
+    type: LOGOUT,
+    loginReply:false  
+  })
+}  
 
 export const SpeedMeter = (value) => (dispatch: any) => {
   dispatch({
@@ -50,3 +63,11 @@ export const SpeedMeter = (value) => (dispatch: any) => {
     speed: value
   })
 } 
+
+export const loader =(status)=>(dispatch:any)=>{
+  
+  dispatch({
+    type: LOADER,
+    isLoading: status
+  })
+}
