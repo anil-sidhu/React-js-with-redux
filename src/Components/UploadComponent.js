@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import Container from '../Containers/Container';
 
-class ProfileComponent extends Component {
+class UploadComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
       file: null
     }
-
+ 
 
   }
 
   onChange(e) {
-
 
     function getBase64(file) {
       var reader = new FileReader();
@@ -67,4 +66,4 @@ class ProfileComponent extends Component {
 }
 
 
-export default ProfileComponent;
+export default UploadComponent;

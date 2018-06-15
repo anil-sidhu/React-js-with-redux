@@ -9,36 +9,14 @@ class NavbarComponent extends Component {
         super(props, context);
         this.state = {
             show: false,
-            loggedIn: !!localStorage.getItem('loggedIn')
         }
     }
-    handleShow() {
-        this.setState({ show: true });
-    }
-    logOut() {
-        this.props.logOut() 
-    }
-    test() {
-        this.setState({ show: false })
-    } 
-
-    componentDidUpdate(prevProps) {
-        {
-          if (prevProps.loginReply != this.props.loginReply) {
-            console.warn("inside nav",this.props.loginReply==prevProps.loginReply )
-             if(this.props.loginReply){
-            localStorage.setItem('loggedIn',this.props.loginReply);
-             }
-            this.setState({loggedIn:this.props.loginReply})
-          }
-        }      
-      }  
-      
+    handleShow() { this.setState({ show: true }); }
+    logOut() { this.props.logOut() }
+    hideModel() { this.setState({ show: false }) }
     render() {
-        console.warn("nav bar render",typeof(this.state.loggedIn),localStorage.getItem('loggedIn')) 
         return (
-            <div> 
-
+            <div>
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -50,21 +28,30 @@ class NavbarComponent extends Component {
                         <Nav pullRight>
                             <NavItem eventKey={1} href="#"><Link to="/">Home</Link></NavItem>
                             {
-                                this.state.loggedIn ?
+                                this.props.loginReply ?
                                     <NavItem >
                                         <Link to="/logout">logout</Link>
                                     </NavItem>
                                     :
-                                    <NavItem eventKey={2} href="#" bsStyle="primary" bsSize="large" onClick={() => this.handleShow()}>
+                                    <NavItem eventKey={2} href="#" className="primary" onClick={() => this.handleShow()}>
                                         Login
                              </NavItem>
                             }
                             <NavItem eventKey={3} href="#"><Link to="/Product">Product</Link></NavItem>
                             <NavItem eventKey={3} href="#"><Link to="/ProfileComponent">ProfileComponent</Link></NavItem>
+
+                            {
+                                this.props.loginReply ?
+                                    <NavItem eventKey={3} href="#"><Link to="/upload">Upload</Link></NavItem>
+                                    : null
+
+                            }
+
+
                         </Nav>
                     </Navbar.Collapse>
                 </Navbar>
-                <Login showModal={this.state.show} hideModel={this.test.bind(this)} />
+                <Login showModal={this.state.show} hideModel={this.hideModel.bind(this)} />
             </div>
 
         );

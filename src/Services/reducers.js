@@ -15,13 +15,12 @@ export default function todos(state = initialState, action) {
       return {
         ...state,
         id: action.id,
-        isLoading: action.isLoading,
+        isLoading: action.isLoading, 
       }
     case SPEED:
       return {
         ...state,
         speedReply: action.speed,
-
       }
       case LOGIN:
       return {

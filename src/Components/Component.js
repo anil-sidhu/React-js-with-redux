@@ -15,20 +15,16 @@ class RedComponent extends Component {
             theme: true,
             csvData: "ac",
         };
-
-
-
     }
     componentDidMount() {
         this.props.loader(true)
-        console.warn("loader before.", this.props.isLoading)
         this.props.toggleTodo("simple")
-
 
     }
     shouldComponentUpdate(nextProps, nextState) {
 
         if (nextProps.todos != nextState.csvData) {
+
             this.setState({
                 csvData: nextProps.todos,
                 next: ''
