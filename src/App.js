@@ -20,11 +20,10 @@ class App extends Component {
 
 
   render() {    
- console.warn("check in app",this.props.loginReply,this.props.counter)
     return ( 
       <Router> 
         <Switch >
-        <div onMouseOver={()=>{console.warn("sss")}}>
+        <div >
           <Loader toggle={this.props.isLoading} />
           <Navbar  />
          
@@ -35,7 +34,6 @@ class App extends Component {
                 <Route exact path="/logout" component={Logout} />
                 <ProtectedComponent path="/ProfileComponent" component={ProfileComponent} />
               
-                
             </div>
           </div> 
         </div>
