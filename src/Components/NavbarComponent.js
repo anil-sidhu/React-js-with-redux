@@ -9,7 +9,7 @@ class NavbarComponent extends Component {
         super(props, context);
         this.state = {
             show: false,
-            loggedIn: localStorage.getItem('loggedIn')
+            loggedIn: !!localStorage.getItem('loggedIn')
         }
     }
     handleShow() {
@@ -26,7 +26,9 @@ class NavbarComponent extends Component {
         {
           if (prevProps.loginReply != this.props.loginReply) {
             console.warn("inside nav",this.props.loginReply==prevProps.loginReply )
+             if(this.props.loginReply){
             localStorage.setItem('loggedIn',this.props.loginReply);
+             }
             this.setState({loggedIn:this.props.loginReply})
           }
         }      

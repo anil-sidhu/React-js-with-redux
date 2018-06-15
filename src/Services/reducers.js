@@ -5,7 +5,7 @@ const initialState = {
   speed: 10,
   login:'',
   isLoading:'',
-  loginReply:'',
+  loginReply:!!localStorage.getItem('loggedIn'),
 }
 
 export default function todos(state = initialState, action) {
