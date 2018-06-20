@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Table } from 'react-bootstrap';
 import { Link, } from "react-router-dom";
 import ReactDOM from 'react-dom';
-
+import img from '../images/load.gif'
 class LazyLoadComponent extends Component {
     constructor(props) {
         super(props)
@@ -11,6 +11,7 @@ class LazyLoadComponent extends Component {
             page: 1,
             size: 18,
             collection: "",
+            loader: false
 
 
         }
@@ -22,7 +23,8 @@ class LazyLoadComponent extends Component {
         obj.page = this.state.page;
         obj.size = this.state.size;
         await this.props.lazyLoad(obj)
-        this.setState({ collection: this.props.lazyLoadReply, })
+        //  this.setState({ collection: this.props.lazyLoadReply.data, })
+        //  console.warn("this.props.lazyLoadReply.data",this.props.lazyLoadReply.data)
     }
     loadMore() {
         let obj = {}
@@ -35,31 +37,33 @@ class LazyLoadComponent extends Component {
         const bottom = e.target.scrollHeight - e.target.scrollTop === e.target.clientHeight;
 
         if (bottom && this.state.page < 7) {
-            this.setState({ page: this.state.page + 1 })
+          
+            this.props.loader(true)
+            this.setState({ page: this.state.page + 1,})
             this.loadMore()
 
-        }
-        console.warn("bottom", this.state.page, bottom)
+        } 
+        console.warn("bottom", this.state.loader)
     }
-
+ 
     shouldComponentUpdate(nextProps, nextState) {
+        this.state.loader=false
         if (nextProps.lazyLoadReply != this.props.lazyLoadReply) {
+        
             this.state.collection = [...this.state.collection, ...nextProps.lazyLoadReply]
-            console.warn("inside", this.state.collection)
-            this.setState({})
+            console.warn("inside",this.state.loader)
+          
             return true
         }
         return false
     }
 
     render() {
-        console.warn("type....", this.state.collection)
-        console.warn("1 loop inside", this.state.collection)
-
-        return (
-            <div>
+        console.warn("isLazyLoading",this.props.isLazyLoading)
+             return (
+            <div style={{ backgroundColor: '#E5EFF1' }}>
                 <div onScroll={this.handleScroll} onScroll={this.handleScroll} style={{ display: "grid", height: "600px" }} >
-                    <Table striped bordered condensed hover responsive>
+                    <Table className={"tableAdjust"} striped bordered condensed hover responsive>
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -86,13 +90,18 @@ class LazyLoadComponent extends Component {
                         }
 
                     </Table>
+                  {
+                    this.props.isLazyLoading ?
+                      <img src={img} className="lazyLoad" />
+                      :null
+                  }
                 </div>
-                
+
             </div>
 
         );
     }
 }
-
+ 
 
 export default LazyLoadComponent;

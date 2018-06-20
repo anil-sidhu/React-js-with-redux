@@ -50,26 +50,35 @@ export const login = (params) => (dispatch: any) => {
 
 
 export const lazyLoad = (params) => (dispatch: any) => {
-  // console.warn("CONFIG", CONFIG.lazyLoad,params)
-  const url = CONFIG.lazyLoad + "?_page="+params.page+"&_limit="+params.size
-  const data = {
-    method: 'GET',
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
-  };
-  let result = fetch(url, data)
-  result.then((dataJson) => {
-    dataJson.json().then((data) => {
-      // console.warn("load data",data)
-      dispatch({
-        type:LAZYLOAD ,
-        lazyLoadReply: data,
-        isLoading: false,
+  dispatch({
+    type: LAZYLOAD,
+    isLazyLoading: true,
+    lazyLoadReply: '',
+    isLoading: false,
+  })
+  setTimeout(() => {
+    const url = CONFIG.lazyLoad + "?_page=" + params.page + "&_limit=" + params.size
+    const data = {
+      method: 'GET',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      }
+    };
+    let result = fetch(url, data)
+    result.then((dataJson) => {
+      dataJson.json().then((data) => {
+        // console.warn("load data",data)
+      
+        dispatch({
+          type: LAZYLOAD,
+          lazyLoadReply: data,
+          isLazyLoading: false,
+          isLoading: false,
+        })
       })
     })
-  })
+  }, 2500)
 }
 
 

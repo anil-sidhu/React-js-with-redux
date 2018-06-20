@@ -7,6 +7,8 @@ const initialState = {
   isLoading:'',
   loginReply:!!localStorage.getItem('loggedIn'),
   lazyLoadReply:'',
+  isLazyLoading:''
+  
 }
 
 export default function todos(state = initialState, action) {
@@ -48,7 +50,8 @@ export default function todos(state = initialState, action) {
       return {
         ...state,
         isLoading: action.isLoading,
-        lazyLoadReply:action.lazyLoadReply
+        lazyLoadReply:action.lazyLoadReply,
+        isLazyLoading:action.isLazyLoading,
 
       }
     default:

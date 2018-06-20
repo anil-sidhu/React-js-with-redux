@@ -16,4 +16,12 @@ body {
   bottom: 0;
   z-index: 100;
 }
+.lazyLoad{
+    margin: auto;
+    height: 70px;
+    margin-top: 10px
+}
+.tableAdjust{
+
+}
 .speedometer .label{color: green;display: none}
