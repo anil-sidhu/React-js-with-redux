@@ -1,4 +1,4 @@
-import { SPEED,LOGIN,LOADER,LOGOUT } from './constatnts'
+import { SPEED,LOGIN,LOADER,LOGOUT,LAZYLOAD } from './constatnts'
 
 const initialState = {
   id: [],
@@ -6,10 +6,11 @@ const initialState = {
   login:'',
   isLoading:'',
   loginReply:!!localStorage.getItem('loggedIn'),
+  lazyLoadReply:'',
 }
 
 export default function todos(state = initialState, action) {
-  console.warn("action",action.loginReply) 
+  // console.warn("action",action.lazyLoadReply) 
   switch (action.type) {
     case 'TOGGLE_TODO':
       return {
@@ -41,6 +42,13 @@ export default function todos(state = initialState, action) {
       return {
         ...state,
         isLoading: action.isLoading,
+
+      }
+      case LAZYLOAD:
+      return {
+        ...state,
+        isLoading: action.isLoading,
+        lazyLoadReply:action.lazyLoadReply
 
       }
     default:

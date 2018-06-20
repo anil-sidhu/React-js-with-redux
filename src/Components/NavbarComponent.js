@@ -42,7 +42,9 @@ class NavbarComponent extends Component {
 
                             {
                                 this.props.loginReply ?
-                                    <NavItem eventKey={3} href="#"><Link to="/upload">Upload</Link></NavItem>
+                                    <NavItem eventKey={3} href="#"><Link to="/upload">Upload</Link>
+                                        <Link style={{ paddingLeft: "20px" }} to="/lazyLoad">lazy Load</Link>
+                                    </NavItem>
                                     : null
 
                             }

@@ -1,6 +1,5 @@
-import { SPEED, LOGIN, LOADER, LOGOUT } from './constatnts'
-// import unregister from '../Interceptor' 
-// console.warn("unregister")
+import { SPEED, LOGIN, LOADER, LOGOUT, LAZYLOAD } from './constatnts'
+import CONFIG from './config'
 export const toggleTodo = (id) => (dispatch: any) => {
   setTimeout(() => {
     const url = "http://192.168.14.126:3004/posts"
@@ -40,7 +39,7 @@ export const login = (params) => (dispatch: any) => {
     dataJson.json().then((data) => {
       localStorage.setItem('loggedIn', true);
       data.loggedIn = true
-      dispatch({ 
+      dispatch({
         type: "LOGIN",
         loginReply: true,
         isLoading: false,
@@ -48,6 +47,31 @@ export const login = (params) => (dispatch: any) => {
     })
   })
 }
+
+
+export const lazyLoad = (params) => (dispatch: any) => {
+  // console.warn("CONFIG", CONFIG.lazyLoad,params)
+  const url = CONFIG.lazyLoad + "?_page="+params.page+"&_limit="+params.size
+  const data = {
+    method: 'GET',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    }
+  };
+  let result = fetch(url, data)
+  result.then((dataJson) => {
+    dataJson.json().then((data) => {
+      // console.warn("load data",data)
+      dispatch({
+        type:LAZYLOAD ,
+        lazyLoadReply: data,
+        isLoading: false,
+      })
+    })
+  })
+}
+
 
 export const logout = () => (dispatch: any) => {
 

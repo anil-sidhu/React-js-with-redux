@@ -12,6 +12,8 @@ import ProfileComponent from './Components/ProfileComponent'
 import ProtectedComponent from './Components/ProtectedComponent'
 import Navbar from './Containers/NavbarContainer';
 import Upload from './Containers/UploadContainer';
+import LazyLoad from './Containers/LazyLoadContainer';
+
 
 class App extends Component {
   constructor(props) {
@@ -25,7 +27,7 @@ class App extends Component {
         <Switch >
         <div >
           <Loader toggle={this.props.isLoading} />
-          <Navbar  />
+          <Navbar  /> 
          
           <div className="container customContainer">
             <div className="row">
@@ -33,7 +35,10 @@ class App extends Component {
                 <Route exact path="/" component={HomeComponent} />
                 <Route exact path="/logout" component={Logout} />
                 <ProtectedComponent path="/ProfileComponent" component={ProfileComponent} />
-              
+                <Route exact path="/lazyLoad" component={LazyLoad} />
+                
+
+                
             </div>
           </div> 
         </div>

@@ -4,7 +4,7 @@ const ProtectedComponent = ({ component: Dummy, ...rest }) => (
    
     <Route
         {...rest}
-        render={props =>
+        render={props => 
             localStorage.getItem('loggedIn') ? (
                 <Dummy {...props} />
             ) : (
@@ -15,7 +15,7 @@ const ProtectedComponent = ({ component: Dummy, ...rest }) => (
                         }}
                     />
                 )
-        } 
+        }  
     />
 );
  
@@ -30,7 +30,7 @@ const ProtectedComponent = ({ component: Dummy, ...rest }) => (
 //     }
 //     render() {
      
-//       return (
+//       return ( 
 //         <div>
 //       {
 //         localStorage.getItem('loggedIn') ? 

@@ -5,16 +5,14 @@ class Loader extends Component {
         super(props)
 
     }
-
     render() {
-        console.warn(" loader comp",this.props.toggle )
         return (
             <div>
                 {
                     this.props.toggle ?
                         <div className="loader">
                         </div>
-                        : <div className="loaderw">
+                        : <div className="">
                         </div>
                 }
             </div>
