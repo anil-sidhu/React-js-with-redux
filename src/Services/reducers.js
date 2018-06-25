@@ -7,7 +7,7 @@ const initialState = {
   isLoading:'',
   loginReply:!!localStorage.getItem('loggedIn'),
   lazyLoadReply:'',
-  isLazyLoading:''
+  isLazyLoading:false
   
 }
 

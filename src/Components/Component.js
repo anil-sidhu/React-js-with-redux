@@ -117,7 +117,7 @@ class RedComponent extends Component {
                     </thead>
                     {this.props.todos.map((dataItem, i) =>
 
-                        <tbody>
+                        <tbody key={i}>
                             <tr>
                                 <td>{i}</td>
                                 <td>

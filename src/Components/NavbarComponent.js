@@ -39,7 +39,7 @@ class NavbarComponent extends Component {
                             }
                             <NavItem eventKey={3} href="#"><Link to="/Product">Product</Link></NavItem>
                             <NavItem eventKey={3} href="#"><Link to="/ProfileComponent">ProfileComponent</Link></NavItem>
-
+                            <NavItem eventKey={3} href="#"><Link to="/map">Map</Link></NavItem>
                             {
                                 this.props.loginReply ?
                                     <NavItem eventKey={3} href="#"><Link to="/upload">Upload</Link>
@@ -48,7 +48,6 @@ class NavbarComponent extends Component {
                                     : null
 
                             }
-
 
                         </Nav>
                     </Navbar.Collapse>

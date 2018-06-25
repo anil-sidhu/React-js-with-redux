@@ -12,12 +12,8 @@ class LazyLoadComponent extends Component {
             size: 18,
             collection: "",
             loader: false
-
-
         }
-
     }
-
     async componentDidMount() {
         let obj = {}
         obj.page = this.state.page;

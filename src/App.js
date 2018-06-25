@@ -13,6 +13,7 @@ import ProtectedComponent from './Components/ProtectedComponent'
 import Navbar from './Containers/NavbarContainer';
 import Upload from './Containers/UploadContainer';
 import LazyLoad from './Containers/LazyLoadContainer';
+import Map from './Containers/MapContainer';
 
 
 class App extends Component {
@@ -36,8 +37,7 @@ class App extends Component {
                 <Route exact path="/logout" component={Logout} />
                 <ProtectedComponent path="/ProfileComponent" component={ProfileComponent} />
                 <Route exact path="/lazyLoad" component={LazyLoad} />
-                
-
+                <Route exact path="/map" component={Map} />            
                 
             </div>
           </div> 

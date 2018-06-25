@@ -80,8 +80,6 @@ export const lazyLoad = (params) => (dispatch: any) => {
     })
   }, 2500)
 }
-
-
 export const logout = () => (dispatch: any) => {
 
   let store = localStorage.removeItem("loggedIn");
