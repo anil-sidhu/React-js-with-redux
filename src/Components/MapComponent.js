@@ -46,23 +46,22 @@ class MapScreen extends Component {
             scaledSize: new this.props.google.maps.Size(90, 42), // scaled size
         };
 
-        
+
 
         return (
             <div>
                 <button onClick={() => { this.getCurrent() }}>Get Current Location</button>
-                <a 
-                href="https://maps.google.com/maps?t=m&f=d&saddr=Current+Location&daddr=delhi"
+                <a
+                    href="https://maps.google.com/maps?t=m&f=d&saddr=Current+Location&daddr=delhi"
                 >test</a>
 
-                <Map google={this.props.google}
+                <Map style={{ height: "500px", width: "800px" }} google={this.props.google}
                     initialCenter={{
                         lat: 28.4595,
                         lng: 77.0266,
                     }}
-                    zoom={13}
+                    zoom={12}
                     onClick={this.onMapClicked}>
-
                     <Marker onClick={this.onMarkerClick}
                         title={'The marker`s title will appear as a tooltip.'}
                         name={'SOMA2'}
