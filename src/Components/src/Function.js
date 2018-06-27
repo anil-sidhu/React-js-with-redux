@@ -1,72 +1,3 @@
-import React, { Component } from 'react';
-export class Valid extends Component {
-    constructor() {
-        super()
-        this.state = {
-            errorMsg: "",
-            return: false,
-            style: {
-                color: 'red'
-            }
-        }
-    }
-    ruleTest(e) {
-
-        switch (this.props.rule) {
-            case "numeric":
-                {
-
-                    this.numericRule("numeric", e.target.value, this.props.min, this.props.max)
-                    break
-                }
-            case "alphabetic":
-                {
-                    this.alphabeticRule("numeric", e.target.value)
-                    break
-                }
-        }
-    }
-    numericRule(numeric, data, min = null, max = null, ) {
-
-        if (isNaN(data)) {
-
-            this.setState({
-                showError: true,
-                errorMsg: "Please Write Number Only"
-            })
-        }
-        else {
-
-            this.setState({
-                errorMsg: ""
-            })
-        }
-    }
-    alphabeticRule(numeric, data, max = null, min = null, ) {
-        if (!isNaN(data)) {
-            this.setState({
-                showError: true,
-                errorMsg: "Please Write alphabetic Only"
-            })
-        }
-        else {
-            this.setState({
-                errorMsg: ""
-            })
-        }
-    }
-    render() {
-
-        return (
-            <div>
-                <span style={{ color: 'red', height: "12px", display: "inline-block" }}>{this.state.errorMsg}</span>
-                <input onClick={this.props.onClick} style={{ display: 'block' }} onChange={(e) => this.ruleTest(e)} type="Text" />
-            </div>
-        )
-    }
-
-};
-
 export const Required = function (data, min = null, max = null) {
     let errorMsg = {};
     data ? data : data = ''
@@ -138,8 +69,10 @@ export const AlphaNumeric = function (data = '', min = null, max = null) {
 
 export const Email = function (data = '') {
     let errorMsg = {};
-    let email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/;
     data ? data : data = ''
+    console.warn("comming data",data)
+    let email = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3,4})+$/;
+    
     if (data.match(email)) {
         errorMsg.msg = "Correct Value"
         errorMsg.status = true
@@ -198,96 +131,10 @@ function lengthValidator(data, min = null, max = null) {
         errorMsg.msg = 'Maximum length should be ' + max
         return errorMsg;
     }
-  
+
     else {
+        errorMsg.status = true;
         errorMsg.msg = "Correct"
     }
     return errorMsg
 }
-
-// export const CustomInput=({component: Dummy, ...rest})=>
-// (   <div>
-//         {...rest}
-//     render={props => 
-//         <Dummy {...props} />
-//     } 
-//        </div> 
-// )
-
-
-// export const CustomInput = ({ component: Dummy, ...rest }) => (
-
-//      <div
-//          {...rest}
-//          render={props => 
-
-//                  <input {...props} />
-
-
-
-//          }  
-//      />
-//  );
-
-// export const CustomInput = ({ ...props, }) => ({
-
-
-//     test() {
-//         alert("here")
-//     },
-//      testapp:"",
-//     value: "100",
-//     render() {
-//         console.warn("props",this.props.onClick )
-//         if(this.props.onClick)
-//             {
-//                 alert("test")
-//             }
-//         return (
-//             <div>
-//                 <input value={this.value} onClick={() => { this.test() }} type="text" {...this.props} />
-//             </div>
-
-
-//         );
-//     }
-// })
-
-
-export class NumberInput extends Component {
-    constructor(props) {
-        super(props)
-        this.state = {
-            input: '', 
-            errorStatus: '',
-            errorMsg: false
-        }
-    }
-    static return = false
-    numeric(e) {
-        if (isNaN(e.target.value)) {
-            NumberInput.return = false
-            this.setState({ errorStatus: true, errorMsg: 'Please Enter number only ' })
-
-        }
-        else {
-            NumberInput.return = true
-
-            this.setState({ errorStatus: false, errorMsg: '' })
-        }
-
-        if (this.props.onChange) {
-            this.props.onChange()
-        }
-    }
-
-    render() {
-        return (
-            <div >
-                 <span style={this.props.styleError} >{this.state.errorStatus ?this.state.errorMsg : null}</span>
-                <input  {...this.props} onChange={(e) => this.numeric(e)} type="text" />
-            </div>
-        );
-    }
-}
-

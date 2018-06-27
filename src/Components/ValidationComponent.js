@@ -2,17 +2,19 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link, Switch, } from "react-router-dom";
 import {
     Valid,
-    Numeric,
     Letter,
     AlphaNumeric,
     Email,
     CustomRx,
-    Required, CustomInput, Dummy
+    Required, Dummy
 } from '../utility/valid'
+import { NumberInput, Numeric,EmailInput } from './src/index.js'
+
 
 class ValidationComponent extends Component {
     state = {
         email: null,
+        style: {}
     };
     submit() {
         // console.warn("Dummy", Dummy())
@@ -21,21 +23,20 @@ class ValidationComponent extends Component {
         // let result = Email(this.state.mobile);
         // console.warn("result", result)
         // this.setState({})
-        console.warn("CustomInput", CustomInput.return)
+        console.warn("CustomInput", NumberInput.return)
     }
 
     render() {
-
+        this.state.style = { color: 'green' }
         return (
             <div>
-                Validation Component
-                <input onBlur={() => { console.log(Required(this.state.mobile, null, 30)) }} onChange={(e) => { this.setState({ mobile: e.target.value }) }} rule="numeric" min="3" max="5" />
+                {/* Validation Component */}
+                {/* <input onBlur={() => { console.log(Required(this.state.mobile, null, 30)) }} onChange={(e) => { this.setState({ mobile: e.target.value }) }} rule="numeric" min="3" max="5" />*/}
                 <input onBlur={() => { console.log(Numeric(this.state.mobile, 4, 8)) }} onChange={(e) => { this.setState({ mobile: e.target.value }) }} rule="numeric" min="3" max="5" />
-
-              
-                <CustomInput  onChange={()=>this.submit()} />
-
-                <button onClick={() => this.submit()}>click me </button>
+                <NumberInput styleError={{ color: 'green', display: 'block' }} onBlur={() => this.submit()} />
+                <EmailInput styleError={{ color: 'red', display: 'block' }} onBlur={() => this.submit()} />
+               
+                <button errorPost="" onClick={() => this.submit()}>click me </button>
             </div>
         )
     }
