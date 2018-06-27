@@ -25,6 +25,7 @@ export default function todos(state = initialState, action) {
         ...state,
         speedReply: action.speed,
       }
+      break;
       case LOGIN:
       return {
         ...state,
@@ -32,6 +33,7 @@ export default function todos(state = initialState, action) {
         isLoading: action.isLoading,
 
       }
+      break;
       case LOGOUT:
       return {
         
@@ -39,7 +41,8 @@ export default function todos(state = initialState, action) {
         loginReply: action.loginReply,
         isLoading: action.isLoading,
 
-      }
+      } 
+      break;
       case LOADER:
       return {
         ...state,
@@ -54,6 +57,7 @@ export default function todos(state = initialState, action) {
         isLazyLoading:action.isLazyLoading,
 
       }
+      break;
     default:
       return state
   }

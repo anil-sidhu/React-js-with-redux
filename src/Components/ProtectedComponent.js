@@ -27,7 +27,7 @@ const ProtectedComponent = ({ component: Dummy, ...rest }) => (
 //     {
 //       super(props)
       
-//     }
+//     } 
 //     render() {
      
 //       return ( 
