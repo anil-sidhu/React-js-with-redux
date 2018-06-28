@@ -3,12 +3,11 @@ import { BrowserRouter as Router, Route, Link, Switch, } from "react-router-dom"
 import {
     Valid,
     Letter,
-    AlphaNumeric,
     Email,
     CustomRx,
     Required, Dummy
 } from '../utility/valid'
-import { NumberInput, Numeric,EmailInput } from './src/index.js'
+import { NumberInput, Numeric,EmailInput,LetterInput,AlphaNumericInput } from './src/index.js'
 
 
 class ValidationComponent extends Component {
@@ -34,7 +33,8 @@ class ValidationComponent extends Component {
                 {/* <input onBlur={() => { console.log(Required(this.state.mobile, null, 30)) }} onChange={(e) => { this.setState({ mobile: e.target.value }) }} rule="numeric" min="3" max="5" />*/}
                 <input onBlur={() => { console.log(Numeric(this.state.mobile, 4, 8)) }} onChange={(e) => { this.setState({ mobile: e.target.value }) }} rule="numeric" min="3" max="5" />
                 <NumberInput styleError={{ color: 'green', display: 'block' }} onBlur={() => this.submit()} />
-                <EmailInput styleError={{ color: 'red', display: 'block' }} onBlur={() => this.submit()} />
+                <LetterInput styleError={{ color: 'red', display: 'block' }} onBlur={() => this.submit()} />
+                <AlphaNumericInput styleError={{ color: 'blue', display: 'block' }} onBlur={() => this.submit()} />
                
                 <button errorPost="" onClick={() => this.submit()}>click me </button>
             </div>

@@ -51,13 +51,14 @@ export const Letter = function (data = '', min = null, max = null) {
 
 export const AlphaNumeric = function (data = '', min = null, max = null) {
     let errorMsg = {};
+    console.warn("income",data)
     let letterNumber = /^[0-9a-zA-Z]+$/;
     data ? data : data = ''
     if (data.match(letterNumber)) {
         errorMsg.msg = "Correct Value"
         errorMsg.status = true
-    }
-    else if (min || max) {
+    } 
+    if (min || max) {
         errorMsg = lengthValidator(data, min, max)
     }
     else {
