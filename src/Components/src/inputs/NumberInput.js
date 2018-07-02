@@ -52,10 +52,18 @@ export class NumberInput extends Component {
     render() {
         return (
             <div >
+                {
+                    React.createElement(
+                        'input',
+                       
+                        { className: 'sidebar',type:'text',placeholder:'enter ' },
+                        null
+                    )
+                }
                 <span className="error-span" style={this.props.styleError} >
                     {this.state.errorStatus ? this.state.errorMsg : null}
                 </span>
-                <input  {...this.props} onChange={(e) => this.Valid(e.target.value)} type="text" />
+                <input placeholder="hello" {...this.props} onChange={(e) => this.Valid(e.target.value)} type="text" />
             </div>
         );
     }

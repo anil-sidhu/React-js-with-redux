@@ -24,4 +24,9 @@ body {
 .tableAdjust{
 
 }
+.app-new{
+  color: green;
+  display: block;
+  height: 18px;
+  }
 .speedometer .label{color: green;display: none}

@@ -16,8 +16,11 @@ export class LetterInput extends Component {
             errorMsg: false
         }
     }
-    static return = false
-   
+    // static return = false
+   componentDIdMount()
+   {
+       console.warn("check props",this.props.return)
+   } 
     Valid(data) {
         let result = Letter(data);
         console.warn("result",data, result)
@@ -31,7 +34,7 @@ export class LetterInput extends Component {
         if (this.props.onChange) {
             this.props.onChange()
         }
-        LetterInput.return = result
+        // LetterInput.return = result
     }
     render() {
         return (
@@ -39,7 +42,7 @@ export class LetterInput extends Component {
                 <span className="error-span" style={this.props.styleError} >
                     {this.state.errorStatus ? this.state.errorMsg : null}
                 </span>
-                <input  {...this.props} onChange={(e) => this.Valid(e.target.value)} type="text" />
+                <input  {...this.props} onClick={()=>{this.props.return()}} onChange={(e) => this.Valid(e.target.value)} type="text" />
             </div>
         );
     }
