@@ -31,7 +31,13 @@ font-size:20px
 .btn{
   background-color:'red'
 }
+.google-covert{
 
+    border: 1px solid #ccc;
+    box-shadow: -1px 2px 4px #ccc;
+    width: 100%;
+
+}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }

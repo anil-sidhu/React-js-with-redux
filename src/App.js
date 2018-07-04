@@ -5,7 +5,7 @@ import Graph from 'react-graph-vis';
 import { BrowserRouter as Router, Route, Link,Switch } from "react-router-dom";
 import ProductsComponent from './Components/ProductsComponent'
 import HomeComponent from './Components/HomeComponent'
-import { unregister } from './Interceptor'
+// import { unregister } from './Interceptor'
 import Loader from './utility/loader'
 import Logout from './Containers/LogoutContainer'
 import ProfileComponent from './Components/ProfileComponent'
@@ -36,13 +36,12 @@ class App extends Component {
                 <Route path="/Product/:id?" component={ProductsComponent} />
                 <Route exact path="/" component={HomeComponent} />
                 <Route exact path="/logout" component={Logout} />
-                <ProtectedComponent path="/ProfileComponent" component={ProfileComponent} />
-                <Route exact path="/lazyLoad" component={LazyLoad} />
-                <Route exact path="/map" component={Map} />  
-                <Route exact path="/validation" component={Validation} />   
-                 
-                         
+                <ProtectedComponent path="/ProfileComponent" component={ProfileComponent} /> 
+                <ProtectedComponent path="/map" component={Map} /> 
                 
+                <Route exact path="/lazyLoad" component={LazyLoad} />
+                {/* <Route exact path="/map" component={Map} />   */}
+                <Route exact path="/validation" component={Validation} />   
             </div>
           </div> 
         </div>

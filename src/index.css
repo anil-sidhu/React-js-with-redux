@@ -29,4 +29,20 @@ body {
   display: block;
   height: 18px;
   }
+.style-unordered-list{
+  padding: 0
+}
+.style-list{cursor: pointer;
+  padding: 2px;
+  list-style: none;
+}
+  
 .speedometer .label{color: green;display: none}
+
+.google-covert{
+  
+      border: 1px solid #ccc;
+      box-shadow: -1px 2px 4px #ccc;
+      width: 100%;
+  
+  }
