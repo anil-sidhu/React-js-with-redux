@@ -1,8 +1,6 @@
-
 import React, { Component } from 'react';
-import axios from 'axios';
-
-const API_KEY = "AIzaSyDGYPsuniZyRC18C2wTO7HBLnmmr8ipLbI" // fake
+import './style.css';
+const proxyUrl = "https://cors-anywhere.herokuapp.com/";
 export class GoogleComponent extends Component {
   constructor(props) {
     super(props);
@@ -13,10 +11,23 @@ export class GoogleComponent extends Component {
       place: '',
       allowCountry: '',
       location: '',
+      returnData: {
+
+      },
+      currentLocation: '',
+      currentCoordinates: {}
     };
   }
 
   componentDidMount() {
+    let _ico = React.createElement("img", {
+      className: 'current-loc-ico',
+      src: "https://www.materialui.co/materialIcons/maps/my_location_black_192x192.png",
+    })
+    let _current = React.createElement("li",
+      { className: 'style-list', onClick: () => this.getCurrentLocation(), },
+      _ico, "Current Location");
+    this.setState({ currentLocation: _current })
     document.addEventListener("mousedown", (e) => this.handleClickOutside(e));
 
   }
@@ -31,6 +42,7 @@ export class GoogleComponent extends Component {
   handleClickOutside(event) {
     if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
       this.setState({ collectionShow: false })
+
     }
   }
   getInfo(param) {
@@ -39,9 +51,9 @@ export class GoogleComponent extends Component {
     let _lang = this.props.language ? 'language=' + this.props.language + '&' : '';
 
     if (this.props.apiKey) {
-      const proxyurl = "https://cors-anywhere.herokuapp.com/";
-      let _fire = fetch(proxyurl + 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
-        param + '&' + _lang + _co + 'key=' + this.props.apiKey
+
+      let _fire = fetch(proxyUrl + 'https://maps.googleapis.com/maps/api/place/autocomplete/json?input=' +
+        param + '&' + _lang + _co + 'location=28.7041,77.1025&key=' + this.props.apiKey
       )
       _fire.then((dataJson) => {
         return dataJson.json().then((data) => {
@@ -62,7 +74,7 @@ export class GoogleComponent extends Component {
               "NO Result Found"));
           }
           let collection = React.createElement("ul", { className: 'style-unordered-list' },
-            child
+            this.state.currentLocation, child
           )
           this.setState({ collection: collection, collectionShow: true })
         })
@@ -72,79 +84,95 @@ export class GoogleComponent extends Component {
       child.push(React.createElement("li",
         { className: 'style-list', }, "No Api Key Provided"));
       let collection = React.createElement("ul", { className: 'style-unordered-list' },
-        child
+        this.state.currentLocation, child
       )
       this.setState({ collection: collection, collectionShow: true })
     }
   }
 
   getCoordinates(address) {
-    let key = "AIzaSyDGwf3wXD5z0XqaolwPbRVRKGIkDnK5ql4"
-
     if (this.props.apiKey) {
-      const proxyurl = "https://cors-anywhere.herokuapp.com/";
-      let _fire = fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '*key=' + key
+      let _fire = fetch(proxyUrl + 'https://maps.googleapis.com/maps/api/geocode/json?address=' + address + '&key=' + this.props.apiKey
       )
       return _fire.then((resp) => {
         return resp.json().then((res) => {
-          console.warn("res,,,", res)
           return res
-
         })
       })
     }
 
   }
+  getCurrentLocation() {
+    if (this.props.apiKey) {
+      navigator.geolocation.getCurrentPosition((location) => {
+        // var obj = { lat: location.coords.latitude, lng: location.coords.longitude }
+        var obj = "latlng=" + location.coords.latitude + "," + location.coords.longitude;
 
-  async arrangeList(place) {
-    let location = await this.getCoordinates(place)
-    let googleObj = {}
-    googleObj.place = place
-    console.warn("location", location)
-    if (location.status == 'OK') {
-      googleObj.coordinates = location.results[0].geometry.location
-    }
-    else {
-      googleObj.coordinates = "Error"
-    }
-    this.setState({ place: place })
+        let _fire = fetch(proxyUrl + 'https://maps.googleapis.com/maps/api/geocode/json?' + obj + '&key=' + this.props.apiKey
+        )
+        return _fire.then((resp) => {
+          return resp.json().then((res) => {
+            console.warn("current location", res.results[0].formatted_address)
+            this._returnData(res.results[0].formatted_address)
+            this.setState({ collectionShow: false })
+          })
+        })
+      });
 
-    if (this.props.onChange) {
-      this.props.onChange(googleObj)
     }
-
+  }
+  arrangeList(place) {
+    this._returnData(place)
     this.setState({ collectionShow: false })
-
   }
   arrangeValue(item) {
-    this.setState({ place: item })
+
     this.getInfo(item)
+    this.setState({ place: item })
+    this.state.returnData.place = item;
+    this.state.returnData.coordinates = ""
+    if (this.props.onChange) {
+      this.props.onChange(this.state.returnData)
+    }
+  }
+
+  async _returnData(place) {
+    this.setState({ place: place })
+    let location = {}
+    location = await this.getCoordinates(place)
+    this.state.returnData.place = place;
+
+    if (this.props.coordinates) {
+      if (location.status == 'OK') {
+
+        this.state.returnData.coordinates = location.results[0].geometry.location
+      }
+      else {
+        this.state.returnData.coordinates = "Error"
+      }
+    }
 
     if (this.props.onChange) {
-      this.props.onChange(item)
+      this.props.onChange(this.state.returnData)
     }
   }
   render() {
     return (
-      React.createElement("div", { className: 'test', ref: (node) => this.setWrapperRef(node) },
-        React.createElement("div", {},
-          React.createElement("div", {},
-            React.createElement("input", {
-              type: "text",
-              onChange: (e) => this.arrangeValue(e.target.value),
-              placeHolder: 'Enter Location...',
-              value: this.state.place
-            }
-            )
-          )
+      React.createElement("div", { class: 'location-box-cover', ref: (node) => this.setWrapperRef(node) },
+
+        React.createElement("input", {
+          type: "text",
+          className: 'location-box',
+          onChange: (e) => this.arrangeValue(e.target.value),
+          placeHolder: 'Enter Location...',
+          value: this.state.place
+        }
         ),
         this.state.collectionShow ?
           React.createElement("div", { className: "google-covert" },
             this.state.collection
           )
           : null
-
-
       )
     )
   }

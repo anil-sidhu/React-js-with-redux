@@ -16,11 +16,13 @@ class HomeComponent extends Component {
   render() {
     console.warn("test", this.state.place)
     return (
-      <div >
+      <div className={"wrapper"} >
         <GoogleComponent
+          style={{ width: "100px" }}
           apiKey={API_KEY}
           language={'en'}
           country={'country:in|country:us'}
+          coordinates={true}
           onChange={(e) => { this.setState({ place: e }) }} />
       </div>
     )
