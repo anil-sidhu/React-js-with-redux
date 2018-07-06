@@ -33,5 +33,30 @@ body {
     width:300px
   }
   
+
+  /* custom style for google place */
+  .custom-style{
+    width: 100%;
+    height: 30px;
+    padding-left: 10px;
+    white-space: nowrap;
+    overflow: hidden !important;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    width:300px
+}
+.custom-style-list{
+  cursor: pointer;
+  list-style: none;
+  border-bottom: 1px solid #6ebfa9;
+  height: 35px;
+  padding-left: 20px;
+  line-height: 35px;
+  white-space: nowrap;
+  overflow: hidden !important;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+}
   
 .speedometer .label{color: green;display: none}
+

@@ -14,15 +14,16 @@ class HomeComponent extends Component {
   }
 
   render() {
-    console.warn("test", this.state.place)
+    // console.warn("test", this.state.place)
     return (
       <div className={"wrapper"} >
         <GoogleComponent
-          style={{ width: "100px" }}
           apiKey={API_KEY}
           language={'en'}
-          country={'country:in|country:us'}
+          country={'country:in'}
           coordinates={true}
+          //locationBoxStyle={'custom-style'}
+          //locationListStyle={'custom-style-list'}
           onChange={(e) => { this.setState({ place: e }) }} />
       </div>
     )
